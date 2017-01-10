@@ -1,10 +1,10 @@
 clear all
-load('opt_result_concise_8.mat');
-H0=[0, 0, 0, .5, .5,  0,  0;...
-    0, 0, 0,  0,  0, .5, .5;...
-    0, 0. 0, -1,  1,  0,  0;...
-    0, 0, 0.  0.  0. -1,  1];
-c =[0, 0, -1, -.5, -.5, 0, 0];
+load('opt_spring_1_concise.mat');
+H0=[0, 0, 0, 0, 0, 0, 0, .5, .5,  0,  0;...
+    0, 0, 0, 0, 0, 0, 0,  0,  0, .5, .5;...
+    0, 0, 0, 0, 0, 0, 0, -1,  1,  0,  0;...
+    0, 0, 0, 0, 0, 0, 0,  0,  0, -1,  1];
+c =[0, 0, -1, -.5, -.5, 0, 0, 0, 0, 0, 0];
 H=[H0;c];
 
 h0=H0*q';
@@ -13,7 +13,7 @@ ddh0=H0*ddq';
 theta=c*q';
 dtheta=c*dq';
 
-M=5;
+M=7;
 alpha=zeros(4,M+1);
 
 alpha(:,1)=H0*q(1,:)';
@@ -46,6 +46,7 @@ plot(s,hd_fit)
 hold on
 plot(s,h0(1,:))
 hold off
+legend('fit','origin')
 
 subplot(2,2,2)
 hd_fit=bc_curve(s,alpha(2,:));
@@ -53,6 +54,7 @@ plot(s,hd_fit)
 hold on
 plot(s,h0(2,:))
 hold off
+legend('fit','origin')
 
 subplot(2,2,3)
 hd_fit=bc_curve(s,alpha(3,:));
@@ -60,6 +62,7 @@ plot(s,hd_fit)
 hold on
 plot(s,h0(3,:))
 hold off
+legend('fit','origin')
 
 subplot(2,2,4)
 hd_fit=bc_curve(s,alpha(4,:));
@@ -67,3 +70,4 @@ plot(s,hd_fit)
 hold on
 plot(s,h0(4,:))
 hold off
+legend('fit','origin')
